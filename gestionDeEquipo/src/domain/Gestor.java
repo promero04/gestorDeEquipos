@@ -25,7 +25,7 @@ public class Gestor {
 	public static List<Jugador> listaDelCsvJugadores(){
 		
 		try {
-			Scanner sc = new Scanner(new FileReader("ficheros/jugadoresCoras.csv"));
+			Scanner sc = new Scanner(new FileReader("ficheros/jugadoresCorasFake.csv"));
 			String linea;
 			while(sc.hasNext()) {
 				linea = sc.nextLine();
@@ -83,7 +83,7 @@ public class Gestor {
 	public static List<Entrenador> listaDelCsvEntrenadores(){
 		
 		try {
-			Scanner sc = new Scanner(new FileReader("ficheros/jugadoresCoras.csv"));
+			Scanner sc = new Scanner(new FileReader("ficheros/jugadoresCorasFake.csv"));
 			String linea;
 			while(sc.hasNext()) {
 				linea = sc.nextLine();

@@ -306,11 +306,16 @@ public class VentanaDePartido extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Jugador jugador = modeloListaJugadores.getElementAt(fila2);
-				modeloListaJugadores.removeElement(jugador);
-				numJugadoresConvocados--;
-				lblConvocados.setText("LLevas " + numJugadoresConvocados + " de 16 jugadores convocados");
+				if(modeloListaJugadores.size()>fila2) {
+					Jugador jugador = modeloListaJugadores.getElementAt(fila2);
+					modeloListaJugadores.removeElement(jugador);
+					numJugadoresConvocados--;
+					lblConvocados.setText("LLevas " + numJugadoresConvocados + " de 16 jugadores convocados");
 
+				}else {
+					JOptionPane.showMessageDialog(null, "Selecciona bien el jugador que quieras quitar de la lista de convocados");
+				}
+				
 			}
 		});
 

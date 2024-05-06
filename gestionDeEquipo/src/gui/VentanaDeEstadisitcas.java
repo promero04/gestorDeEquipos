@@ -32,6 +32,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.awt.BorderLayout;
 
@@ -46,6 +47,9 @@ public class VentanaDeEstadisitcas extends JFrame {
 	private int fila = 0;
 	private JLabel lblNombreEquipo, lblNombreEntrenador, lblListaJugadores, lblEstadisticas, lblHoraDePartido;
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+	
+	private static String jugadoresStr = "";
+	
 	public VentanaDeEstadisitcas() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -61,7 +65,7 @@ public class VentanaDeEstadisitcas extends JFrame {
 		int anchoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
 		int altoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
 		
-		panel.setPreferredSize(new Dimension(anchoP, altoP-500));
+		panel.setPreferredSize(new Dimension(anchoP, altoP-300));
 		
 		
 		
@@ -111,12 +115,20 @@ public class VentanaDeEstadisitcas extends JFrame {
 				Estadisticas estadisticas = (Estadisticas) tablaPartidos.getModel().getValueAt(fila, 3);
 				Date horaDePartido = (Date) tablaPartidos.getModel().getValueAt(fila, 4);
 				
+				String estadisticasStr = String.format("<html>GF: %s <br> GC: %s <br> TF: %s <br> PM: %s <br> PF: %s <br> G6: %s <br> G9: %s <br> NE: %s <br> NA: %s <br> NP: %s</html>", estadisticas.getnTotalDeGolesAFavor(), estadisticas.getnTotalDeGolesEnContra(), estadisticas.getnDeTirosFallidos(), estadisticas.getnDePenaltisMetidos(), estadisticas.getnDePenaltisfallados(), estadisticas.getnDeGolesSeisMetros(), estadisticas.getnDeGolesNueveMetros(), estadisticas.getnDeExpulsiones(),estadisticas.getnDeAmarillas(), estadisticas.getnDeParadas());
 				
+				
+				
+				
+					
+					
+				
+			
 				
 				lblNombreEquipo.setText(nombreDeEquipo);
 				lblNombreEntrenador.setText(segundoEntrenador);
 				lblListaJugadores.setText(lJugadores.toString());
-				lblEstadisticas.setText(estadisticas.toString());
+				lblEstadisticas.setText(estadisticasStr);
 				lblHoraDePartido.setText(sdf.format(horaDePartido));
 				}
 		});
