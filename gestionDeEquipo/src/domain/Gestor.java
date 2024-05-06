@@ -178,7 +178,7 @@ public class Gestor {
 		return listaSegundaLinea;
 	}
 	
-	public static void guardarPartido(Partido p,  String fichero) {
+	public static void guardarPartido(List<Partido> p,  String fichero) {
 		try {
 			FileOutputStream fos = new FileOutputStream(fichero);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -193,13 +193,13 @@ public class Gestor {
 			e.printStackTrace();
 		}
 	}
-	public static Partido cargarPartidos(String fichero) {
-		Partido p = null;
+	public static List<Partido> cargarPartidos(String fichero) {
+		List<Partido> p = new ArrayList<Partido>();
 		try {
 			FileInputStream fis = new FileInputStream(fichero);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			
-			p = (Partido) ois.readObject();
+			p =  (List<Partido>) ois.readObject();
 			
 			
 			ois.close();

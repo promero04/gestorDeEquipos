@@ -70,19 +70,7 @@ public class VentanaVisualizarEntrenadores extends JFrame {
 		
 		
 		
-//		Comparator c = new Comparator<Jugador>() {
-//
-//			@Override
-//			public int compare(Jugador o1, Jugador o2) {
-//				
-//				Long fecha1 = Long.parseLong(o1.getfNac().toString());
-//				Long fecha2 = Long.parseLong(o2.getfNac().toString());
-//					
-//				
-//				return (int) (fecha1 - fecha2);
-//			}
-//		};
-//		lj.sort(c);
+
 		
 		
 		modeloTablaEntrenadores = new ModeloTablaEntrenadores(Gestor.listaEntrenadores);
@@ -181,29 +169,12 @@ public class VentanaVisualizarEntrenadores extends JFrame {
 		pnlBotonera = new JPanel();
 		contentPane.add(pnlBotonera, BorderLayout.CENTER);
 		
-		btnAniadirJugador = new JButton("AÑADIR ENTRENADOR");
-		pnlBotonera.add(btnAniadirJugador);
 		
-		btnBorrarEntrenador = new JButton("ELIMINAR ENTRENADOR");
-		pnlBotonera.add(btnBorrarEntrenador);
 		
 		
 		
 		panelAniadirJugador = new JPanel();
-		btnAniadirJugador.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(
-	                    null,
-	                    panelAniadirJugador,
-	                    " ",
-	                    JOptionPane.PLAIN_MESSAGE);
-	        
-			
-				
-			}
-		});
+		
 		
 		btnVolver.addActionListener(new ActionListener() {
 			

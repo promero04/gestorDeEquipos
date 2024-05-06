@@ -42,7 +42,7 @@ public class Jugador extends Persona implements Serializable{
 
 	@Override
 	public String toString() {
-		return  posicion + "  " + getNombre() +" "+ getApellido1() +" "+getApellido2();
+		return  posicion +" "+ getNombre() +" "+ getApellido1();
 		}
 	
 }

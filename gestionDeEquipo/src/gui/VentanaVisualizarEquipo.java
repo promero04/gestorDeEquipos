@@ -69,19 +69,7 @@ public class VentanaVisualizarEquipo extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		
-//		Comparator c = new Comparator<Jugador>() {
-//
-//			@Override
-//			public int compare(Jugador o1, Jugador o2) {
-//				
-//				Long fecha1 = Long.parseLong(o1.getfNac().toString());
-//				Long fecha2 = Long.parseLong(o2.getfNac().toString());
-//					
-//				
-//				return (int) (fecha1 - fecha2);
-//			}
-//		};
-//		lj.sort(c);
+
 		
 		
 		modeloTablaJugadores = new ModeloTablaJugadores(Gestor.listaJugadores);
@@ -176,11 +164,7 @@ public class VentanaVisualizarEquipo extends JFrame {
 		panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		
-		btnAniadirJugador = new JButton("AÑADIR JUGADOR");
-		panel_1.add(btnAniadirJugador);
 		
-		btnNewButton_1 = new JButton("ELIMINAR JUGADOR");
-		panel_1.add(btnNewButton_1);
 		
 		btnVolver.addActionListener(new ActionListener() {
 			

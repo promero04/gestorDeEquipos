@@ -12,6 +12,7 @@ import domain.Gestor;
 import domain.Jugador;
 import domain.Partido;
 import domain.Portero;
+import main.Main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -89,8 +90,7 @@ public class VentanaDePartido extends JFrame {
 
 	List<Jugador> listaJugadoresConvocados = new ArrayList<>();
 	
-	private static List<Partido> listaDePartidos = new ArrayList<Partido>();
-
+	
 	int fila = 0;
 	int fila2 = 0;
 	int numJugadoresConvocados = 0;
@@ -385,7 +385,7 @@ public class VentanaDePartido extends JFrame {
 		JPanel pnlGuardarTodo = new JPanel();
 		
 		
-		pnlPrincipal.setPreferredSize(new Dimension(anchoP, altoP-450));
+		pnlPrincipal.setPreferredSize(new Dimension(anchoP-150, altoP-450));
 	
 		pnlCrearEstadisticas.add(pnlPrincipal);
 		
@@ -627,9 +627,9 @@ public class VentanaDePartido extends JFrame {
 				p.addEstaditicas(estadisticas);
 
 				
+				Main.getListaDePartidos().add(p);
 				
-				
-				Gestor.guardarPartido(p, Gestor.getNombreFich());
+				Gestor.guardarPartido(Main.getListaDePartidos(), Gestor.getNombreFich());
 				
 				dispose();
 				new VentanaInicial();
@@ -641,7 +641,7 @@ public class VentanaDePartido extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				
+				new VentanaInicial();
 			}
 		});
 
@@ -662,13 +662,7 @@ public class VentanaDePartido extends JFrame {
 	
 	
 
-	public static List<Partido> getListaDePartidos() {
-		return listaDePartidos;
-	}
-
-	public static void setListaDePartidos(List<Partido> listaDePartidos) {
-		VentanaDePartido.listaDePartidos = listaDePartidos;
-	}
+	
 	
 	
 

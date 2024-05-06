@@ -97,12 +97,9 @@ public class Estadisticas implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Estadisticas [nTotalDeGolesAFavor=" + nTotalDeGolesAFavor + ", nTotalDeGolesEnContra="
-				+ nTotalDeGolesEnContra + ", nDeTirosFallidos=" + nDeTirosFallidos + ", nDePenaltisMetidos="
-				+ nDePenaltisMetidos + ", nDePenaltisfallados=" + nDePenaltisfallados + ", nDeGolesSeisMetros="
-				+ nDeGolesSeisMetros + ", nDeGolesNueveMetros=" + nDeGolesNueveMetros + ", nDeExpulsiones="
-				+ nDeExpulsiones + ", nDeAmarillas=" + nDeAmarillas + ", nDeParadas=" + nDeParadas + "]";
-	}
+		return "GF: "+nTotalDeGolesAFavor+ " GC: " + nTotalDeGolesEnContra +" TF: "+ nDeTirosFallidos +" PM: "+ nDePenaltisMetidos +" PF: "+nDePenaltisfallados 
+				+" G6: "+nDeGolesSeisMetros +" G9"+ nDeGolesNueveMetros +" NE: "+nDeExpulsiones + " NA: " + nDeAmarillas + " NP: "+ nDeParadas;
+				}
 	
 	
 	

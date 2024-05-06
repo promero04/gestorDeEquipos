@@ -6,30 +6,46 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
+import domain.Estadisticas;
 import domain.Gestor;
+import domain.Jugador;
 import domain.Partido;
+import main.Main;
 
 import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.awt.BorderLayout;
 
 public class VentanaDeEstadisitcas extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JLabel lblExplicacion;
-	private JComboBox<Partido> comboPartidos;
-	
-
-
+	private JPanel contentPane, pnlBotones;
+	private JButton btnSalir, btnVaciar;
+	private JTable tablaPartidos;
+	private ModeloTablaPartidos modeloTablaPartidos;
+	private JScrollPane scrollTabla;
+	private int fila = 0;
+	private JLabel lblNombreEquipo, lblNombreEntrenador, lblListaJugadores, lblEstadisticas, lblHoraDePartido;
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 	public VentanaDeEstadisitcas() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -41,50 +57,111 @@ public class VentanaDeEstadisitcas extends JFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel);
-		panel.setLayout(new GridLayout(2,1));
+		panel.setLayout(new GridLayout(3,1));
 		int anchoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
 		int altoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
-		aniadirBordeAlJPanel("", panel);
+		
 		panel.setPreferredSize(new Dimension(anchoP, altoP-500));
 		
-		JPanel pnlArriba = new JPanel();
-		panel.add(pnlArriba);
-		pnlArriba.setLayout(new GridLayout(1,2));
-		
-		JPanel pnlTexto = new JPanel();
-		pnlArriba.add(pnlTexto);
-		
-		Partido p = Gestor.cargarPartidos(Gestor.getNombreFich());
-		comboPartidos = new JComboBox<Partido>();
 		
 		
-		comboPartidos.addItem(p);
 		
+		modeloTablaPartidos = new ModeloTablaPartidos(Gestor.cargarPartidos(Gestor.getNombreFich()));
+		tablaPartidos = new JTable(modeloTablaPartidos);
+		scrollTabla = new JScrollPane(tablaPartidos);
 		
-		JPanel pnlPartidos = new JPanel();
-		
-		pnlPartidos.add(comboPartidos);
-		pnlArriba.add(pnlPartidos);
+		panel.add(scrollTabla);
 		
 		
 		JPanel pnlAbajo = new JPanel();
+		pnlAbajo.setLayout(new GridLayout(1, 5));
 		panel.add(pnlAbajo);
-		pnlTexto.setLayout(new BorderLayout(0, 0));
 		
-		lblExplicacion = new JLabel("Aqui podras ver todos los partidos que has tenido como entrenador, selecciona el que quieras consultar");
-		lblExplicacion.setFont(new Font("Agency FB", Font.CENTER_BASELINE, 21));
-		pnlTexto.add(lblExplicacion);
+		lblNombreEquipo = new JLabel();
+		lblNombreEntrenador = new JLabel();
+		lblEstadisticas = new JLabel();
+		lblListaJugadores = new JLabel();
+		lblHoraDePartido = new JLabel();
+		
+		aniadirBordeAlJPanel("ESTADISTICAS", lblEstadisticas);
+		aniadirBordeAlJPanel("SEGUNDO ENTRENADOR", lblNombreEntrenador);
+		aniadirBordeAlJPanel("LISTA JUGADORES", lblListaJugadores);
+		aniadirBordeAlJPanel("HORA DE PARTIDO", lblHoraDePartido);
+		aniadirBordeAlJPanel("NOMBRE DE EQUIPO", lblNombreEquipo);
 		
 		
+		
+		pnlAbajo.add(lblNombreEquipo);
+		pnlAbajo.add(lblNombreEntrenador);
+		pnlAbajo.add(lblListaJugadores);
+		pnlAbajo.add(lblEstadisticas);
+		pnlAbajo.add(lblHoraDePartido);
+		
+		tablaPartidos.addMouseListener(new MouseAdapter() {
+			
+			
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Point p = e.getPoint();
+				fila = tablaPartidos.rowAtPoint(p);
+				String nombreDeEquipo = (String) tablaPartidos.getModel().getValueAt(fila, 0);
+				String segundoEntrenador = (String) tablaPartidos.getModel().getValueAt(fila, 1);
+				List<Jugador> lJugadores = (List<Jugador>) tablaPartidos.getModel().getValueAt(fila, 2);
+				Estadisticas estadisticas = (Estadisticas) tablaPartidos.getModel().getValueAt(fila, 3);
+				Date horaDePartido = (Date) tablaPartidos.getModel().getValueAt(fila, 4);
+				
+				
+				
+				lblNombreEquipo.setText(nombreDeEquipo);
+				lblNombreEntrenador.setText(segundoEntrenador);
+				lblListaJugadores.setText(lJugadores.toString());
+				lblEstadisticas.setText(estadisticas.toString());
+				lblHoraDePartido.setText(sdf.format(horaDePartido));
+				}
+		});
+				
+		pnlBotones = new JPanel();
+		panel.add(pnlBotones);
+		
+		
+		btnSalir = new JButton("SALIR");
+		btnVaciar = new JButton("BORRAR BASE DE DATOS");
+		pnlBotones.add(btnVaciar);
+		
+		pnlBotones.add(btnSalir);
+		
+		
+		
+		btnSalir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				
+				
+			}
+		});
+		
+		btnVaciar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Main.getListaDePartidos().clear();
+				Gestor.guardarPartido(Main.getListaDePartidos(), Gestor.getNombreFich());
+				dispose();
+				new VentanaDeEstadisitcas();
+			}
+		});
 	}
-	public static void aniadirBordeAlJPanel(String titulo, JPanel panel) {
-		LineBorder borde = new LineBorder(Color.BLACK, 7);
+	public static void aniadirBordeAlJPanel(String titulo, JLabel label) {
+		LineBorder borde = new LineBorder(Color.BLUE, 2);
 		TitledBorder bordeDelTitulo = new TitledBorder(borde, titulo);
 		
 		bordeDelTitulo.setTitleJustification(TitledBorder.CENTER);
 		bordeDelTitulo.setTitleFont(new Font("verdana", Font.BOLD, 20));
 		
-		panel.setBorder(bordeDelTitulo);
+		label.setBorder(bordeDelTitulo);
 	}
 
 }
